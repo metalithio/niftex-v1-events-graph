@@ -1,0 +1,41 @@
+specVersion: 0.0.2
+description: Subgraph for tracking NFT fractionalizations on NIFTEX.com
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ShardGovernor
+    network: mainnet
+    source:
+      # address: "0xb07f7a3216f8d7a986b5491723e45c4db6d267f0"
+      abi: ShardGovernor
+      startBlock: 9927190
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - NewShotgun
+        # - NftRedeemed
+        # - ShardsClaimed
+        # - ShardsCollected
+        # - ShotgunEnacted
+      abis:
+        - name: ShardGovernor
+          file: ./abis/ShardGovernor.json
+        - name: ShardRegistry
+          file: ./abis/ShardRegistry.json
+        - name: ShotgunClause
+          file: ./abis/ShotgunClause.json
+      eventHandlers:
+        - event: NewShotgun(indexed address)
+          handler: handleNewShotgun
+        # - event: NftRedeemed(indexed address)
+        #   handler: handleNftRedeemed
+        # - event: ShardsClaimed(indexed address,indexed uint256)
+        #   handler: handleShardsClaimed
+        # - event: ShardsCollected(indexed address,indexed uint256,indexed address)
+        #   handler: handleShardsCollected
+        - event: ShotgunEnacted(indexed address)
+          handler: handleShotgunEnacted
+      file: ./src/mapping.ts

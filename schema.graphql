@@ -1,0 +1,20 @@
+enum ShotgunWinner {
+	None
+	InitialClaimant
+	CounterClaimant
+}
+
+type Shotgun @entity {
+  id: ID!
+	shardRegistry: Bytes!
+	initialClaimant: Bytes!
+	totalValue: BigInt!
+	block: BigInt!
+	createdAt: BigInt!
+	symbol: String!
+	pricePerShardInEth: BigDecimal!
+	valuationInEth: BigDecimal!
+	deadline: BigInt!
+	enacted: Boolean!
+	winner: ShotgunWinner!
+}
