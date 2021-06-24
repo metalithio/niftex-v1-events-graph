@@ -1,6 +1,6 @@
 {
   "name": "niftex-v1-events",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
